@@ -1,0 +1,65 @@
+﻿Id,State,CountryName
+1,Alberta,Canada
+2,British Columbia,Canada
+3,Manitoba,Canada
+4,New Brunswick,Canada
+5,Newfoundland and Labrador,Canada
+6,Northwest Territorie,Canada
+7,Nova Scotia,Canada
+8,Nunavut,Canada
+9,Ontario,Canada
+10,Prince Edward Island,Canada
+11,Quebec,Canada
+12,Saskatchewan,Canada
+13,Yukon,Canada
+14,Alaska,USA
+15,Arizona,USA
+16,Arkansas,USA
+17,California,USA
+18,Colorado,USA
+19,Connecticut,USA
+20,Delaware,USA
+21,District of Columbia,USA
+22,Florida,USA
+23,Georgia,USA
+24,Hawaii,USA
+25,Idaho,USA
+26,Illinois,USA
+27,Indiana,USA
+28,Iowa,USA
+29,Kansas,USA
+30,Kentucky,USA
+31,Louisiana,USA
+32,Maine,USA
+33,Maryland,USA
+34,Massachusetts,USA
+35,Michigan,USA
+36,Minnesota,USA
+37,Mississippi,USA
+38,Missouri,USA
+39,Montana,USA
+40,Nebraska,USA
+41,Nevada,USA
+42,New Hampshire,USA
+43,New Jersey,USA
+44,New Mexico,USA
+45,New York,USA
+46,North Carolina,USA
+47,North Dakota,USA
+48,Ohio,USA
+49,Oklahoma,USA
+50,Oregon,USA
+51,Pennsylvania,USA
+52,Puerto Rico,USA
+53,Rhode Island,USA
+54,South Carolina,USA
+55,South Dakota,USA
+56,Tennessee,USA
+57,Texas,USA
+58,Utah,USA
+59,Vermont,USA
+60,Virginia,USA
+61,Washington,USA
+62,West Virginia,USA
+63,Wisconsin,USA
+64,Wyoming,USA
