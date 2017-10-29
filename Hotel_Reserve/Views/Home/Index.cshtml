@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Home Page| Hotel.com";
+}
+
+<div class="jumbotron">
+    <h2>Book a Room at Hotel.com</h2>
+    <p class="lead">Register to this hotel website to make a reservation at this 5 star hotel 
+    @Html.ActionLink("Register", "RegisterCustomer", "Customer", null, new { @class = "btn btn-success btn-md" })</p>
+    <p>
+        Already Registered? @Html.ActionLink("Login Now!", "LoginCustomer", "Customer", null, new { @class = "btn btn-info btn-sm" })
+    </p>
+    
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>About</h2>
+        <p>
+            This WebForm is part of our project for 5510 Software Development in Business Environment. @Html.ActionLink("More Info", "About", "Home", new { @class = "btn btn-info btn-sm" })<span class="glyphicon glyphicon-chevron-right"></span>
+        </p>
+    </div>
+    <div class="col-md-6">
+        <h2>Developed By:-</h2>
+        <p>Carlo Carandang</p>
+        <p>Sahil Behl</p>
+    </div>
+</div>
