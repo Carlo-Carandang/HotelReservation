@@ -61,10 +61,24 @@
         </div>
     
   
-        <script>
-            $(document).ready(function () {
-                $('#CheckInDate').datepicker()
+
+   
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/cssjqryUi")
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('input[type=datetime]').datepicker({
+                dateFormat: "dd/M/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-0:+10"
             });
 
-        </script>
-   
+        });
+    </script>
+
+}  

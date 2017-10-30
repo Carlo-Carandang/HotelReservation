@@ -13,13 +13,16 @@ namespace Hotel_Reserve.Controllers
     public class ReservationController : Controller
     {
         ReservationContext db = new ReservationContext();
+
+        public ReservationContext Db { get => db; set => db = value; }
+
         // GET: Reservation
         public ActionResult Index(int id)
         {
             if(Session["Email"]!=null)
                 {
                 Session["CustomerId"] = id;
-                List<Reservation> res = db.Reservations.Where(reserve => reserve.Cid == id).ToList();
+                List<Reservation> res = Db.Reservations.Where(reserve => reserve.Cid == id).ToList();
                 return View(res);
             }
             else
@@ -64,8 +67,8 @@ namespace Hotel_Reserve.Controllers
             reservation.Cid = a;
             if (ModelState.IsValid)
             {
-                db.Reservations.Add(reservation);
-                db.SaveChanges();
+                Db.Reservations.Add(reservation);
+                Db.SaveChanges();
                 return RedirectToAction("Index", "Reservation", new { id = a });
             }
 
@@ -79,7 +82,7 @@ namespace Hotel_Reserve.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Reservation reservation = db.Reservations.Find(id);
+            Reservation reservation = Db.Reservations.Find(id);
             if (reservation == null)
             {
                 return HttpNotFound();
@@ -101,8 +104,8 @@ namespace Hotel_Reserve.Controllers
 
             if (ModelState.IsValid)
             {
-                db.Reservations.Add(reservation);
-                db.SaveChanges();
+                Db.Reservations.Add(reservation);
+                Db.SaveChanges();
                 return RedirectToAction("Index","Reservation",new { id = a });
             }
 
@@ -115,7 +118,7 @@ namespace Hotel_Reserve.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Reservation reservation = db.Reservations.Find(id);
+            Reservation reservation = Db.Reservations.Find(id);
             if (reservation == null)
             {
                 return HttpNotFound();
@@ -129,9 +132,9 @@ namespace Hotel_Reserve.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             int a = Int32.Parse(Session["CustomerId"].ToString());
-            Reservation reservation = db.Reservations.Find(id);
-            db.Reservations.Remove(reservation);
-            db.SaveChanges();
+            Reservation reservation = Db.Reservations.Find(id);
+            Db.Reservations.Remove(reservation);
+            Db.SaveChanges();
             return RedirectToAction("Index", "Reservation", new { id = a });
         }
     }
