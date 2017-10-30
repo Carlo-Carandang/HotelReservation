@@ -30,6 +30,11 @@ namespace Hotel_Reserve.Controllers
         [HttpPost]
         public ActionResult RegisterCustomer(Customer customerModel)
         {
+            if (customerModel == null)
+            {
+                throw new ArgumentNullException(nameof(customerModel));
+            }
+
             using (CustomerContext customerMl = new CustomerContext())
             {
                 if (customerMl.Customers.Any(x => x.Email == customerModel.Email))
@@ -41,10 +46,9 @@ namespace Hotel_Reserve.Controllers
                 customerMl.SaveChanges();
             }
             ModelState.Clear();
-            ViewBag.SuccessMessage = "Registration Successfull";
+            ViewBag.SuccessMessage = "Registration Successful";
             return RedirectToAction("Index", "Reservation", new { id = customerModel.id });
         }
-
         //----------------------------------- GET: Login----------------------------------------------------------------------
         public ActionResult LoginCustomer()
         {
