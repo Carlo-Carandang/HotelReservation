@@ -15,11 +15,13 @@ namespace Hotel_Reserve.Models
         [Required(ErrorMessage = "Please Enter Last Name")]
         [Display(Name = "Last Name")]
         [StringLength(50)]
+        [RegularExpression(@"^[a-zA-Z''-'\s]{1,50}$", ErrorMessage = "special characters and numbers are not allowed")]
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "Please Enter First Name")]
         [Display(Name = "First Name")]
         [StringLength(50)]
+        [RegularExpression(@"^[a-zA-Z''-'\s]{1,50}$", ErrorMessage = "special characters and numbers are not allowed")]
         public string FirstName { get; set; }
 
         [Required(ErrorMessage = "Please Enter Street Number")]
@@ -35,6 +37,7 @@ namespace Hotel_Reserve.Models
         [Required(ErrorMessage = "Please Enter City")]
         [Display(Name = "City")]
         [StringLength(50)]
+        [RegularExpression(@"^[a-zA-Z''-'\s]{1,50}$", ErrorMessage = "special characters and numbers are not allowed")]
         public string City { get; set; }
 
         [Required(ErrorMessage = "Please Enter Province")]
@@ -83,6 +86,7 @@ namespace Hotel_Reserve.Models
         [Required]
         [StringLength(50)]
         [Display(Name = "Credit Card Name")]
+        [RegularExpression(@"^[a-zA-Z''-'\s]{1,50}$", ErrorMessage = "special characters and numbers are not allowed")]
         public string CreditCardName { get; set; }
 
         [Required]
