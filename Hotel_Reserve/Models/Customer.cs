@@ -58,6 +58,7 @@ namespace Hotel_Reserve.Models
         [Required(ErrorMessage = "Please Enter Phone Number")]
         [Display(Name = "Phone Number")]
         [StringLength(10, ErrorMessage = "The phone must contain 10 characters", MinimumLength = 10)]
+        [RegularExpression(@"^([0-9\(\)\/\+ \-]*)$", ErrorMessage = "Invalid Phone number")]
         public string PhoneNumber { get; set; }
 
         [StringLength(50)]
