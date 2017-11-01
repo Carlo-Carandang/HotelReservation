@@ -73,7 +73,9 @@ namespace Hotel_Reserve.Models
         public string CreditCardType { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [MaxLength(16)]
+        [MinLength(15)]
+        [RegularExpression("^(5[1-5]\\d{14})|(4\\d{15})|(3[47]\\d{13})$",ErrorMessage ="Invalid Credit Card Number")]
         [Display(Name = "Credit Card Number")]
         public string CreditCardNumber { get; set; }
 
