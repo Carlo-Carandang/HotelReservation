@@ -44,10 +44,11 @@ namespace Hotel_Reserve.Models
         [Display(Name="Country")]
         public string Country { get; set; }
 
-        [RequiredIf("Country", "USA", "error")]
+        
         [RegularExpression("^([A-Za-z]\\d[A-Za-z][ -]?\\d[A-Za-z]\\d)|(^[0-9]{5}(?:-[0-9]{4})?)$",ErrorMessage = "Invalid Postal/Zip Code")]
         [Display(Name = "Postal Code")]
         [StringLength(10)]
+        [PostalValidation]
         public string PostalCode { get; set; }
 
         [Required(ErrorMessage = "Please Enter Phone Number")]
@@ -77,6 +78,7 @@ namespace Hotel_Reserve.Models
         [MinLength(15)]
         [RegularExpression("^(5[1-5]\\d{14})|(4\\d{15})|(3[47]\\d{13})$",ErrorMessage ="Invalid Credit Card Number")]
         [Display(Name = "Credit Card Number")]
+        [CreditValidation]
         public string CreditCardNumber { get; set; }
 
         [Required]
