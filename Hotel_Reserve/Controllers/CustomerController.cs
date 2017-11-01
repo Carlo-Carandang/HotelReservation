@@ -14,8 +14,15 @@ namespace Hotel_Reserve.Controllers
         //---------------------------------- GET: Register Customer-----------------------------------------------
         public ActionResult RegisterCustomer()
         {
-            List<Country> CountryList = db1.Countries.ToList();
-            ViewBag.CountryList = new SelectList(CountryList,"CountryName","CountryName");
+            /*List<Country> CountryList = db1.Countries.ToList();
+            ViewBag.CountryList = new SelectList(CountryList,"CountryName","CountryName");*/
+            List<SelectListItem> CountryList = new List<SelectListItem>()
+            {
+                new SelectListItem {Text="USA",Value="USA" },
+                new SelectListItem {Text="Canada",Value="Canada"}
+
+            };
+            ViewBag.CountryList = CountryList;
             Customer customerModel = new Customer();
             return View(customerModel);
         }
@@ -37,17 +44,28 @@ namespace Hotel_Reserve.Controllers
 
             using (CustomerContext customerMl = new CustomerContext())
             {
+                if(ModelState.IsValid)
+                {
+                    customerMl.Customers.Add(customerModel);
+                    customerMl.SaveChanges();
+                    ViewBag.SuccessMessage = "Registration Successful";
+                    return RedirectToAction("Index", "Reservation", new { id = customerModel.id }); 
+                }
                 if (customerMl.Customers.Any(x => x.Email == customerModel.Email))
                 {
                     ViewBag.DuplicateMessage = "Customer with this email is already registered";
-                    return View("RegisterCustomer", customerModel);
                 }
-                customerMl.Customers.Add(customerModel);
-                customerMl.SaveChanges();
-            }
-            ModelState.Clear();
-            ViewBag.SuccessMessage = "Registration Successful";
-            return RedirectToAction("Index", "Reservation", new { id = customerModel.id });
+                /*List<Country> CountryList = db1.Countries.ToList();
+                ViewBag.CountryList = new SelectList(CountryList, "CountryName", "CountryName");*/
+                List<SelectListItem> CountryList = new List<SelectListItem>()
+                {
+                    new SelectListItem {Text="USA",Value="USA" },
+                    new SelectListItem {Text="Canada",Value="Canada"}
+                };
+                ViewBag.CountryList = CountryList;
+                return View("RegisterCustomer", customerModel);
+
+            }   
         }
         //----------------------------------- GET: Login----------------------------------------------------------------------
         public ActionResult LoginCustomer()
@@ -105,5 +123,15 @@ namespace Hotel_Reserve.Controllers
         {
             return View();
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }
+ 

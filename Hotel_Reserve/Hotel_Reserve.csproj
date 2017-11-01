@@ -167,6 +167,7 @@
     <Compile Include="Models\CountryState.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\CustomerContext.cs" />
+    <Compile Include="RequiredIfAttribute.cs" />
     <Compile Include="Models\Reservation.cs" />
     <Compile Include="Models\ReservationContext.cs" />
     <Compile Include="Models\State.cs" />

@@ -5,7 +5,7 @@
 }
 <h2>Register</h2>
 
-@using (Html.BeginForm("RegisterCustomer", "Customer", FormMethod.Post)) 
+@using (Html.BeginForm("RegisterCustomer", "Customer", FormMethod.Post, new { name = "frm", id = "frm" }))
 {
          @Html.AntiForgeryToken()
 
@@ -73,7 +73,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">Country</label>
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Country, ViewBag.CountryList as SelectList, "Select Country", new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.Country, ViewBag.CountryList as List<SelectListItem>, "Select Country", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -162,8 +162,7 @@
         </div>
     </div>
 }
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <script>
     $(document).ready(function () {
         $("#Country").change(function () {
@@ -173,6 +172,29 @@
                     $("#Province").append("<option value='" + row.State1 + "'>" + row.State1 + "</option>")
                 });
             });
-        })
+        });
+    });
+
+    $.validator.unobtrusive.adapters.add('requiredif', ['dependentproperty', 'desiredvalue'], function (options) {
+        options.rules['requiredif'] = options.params;
+        options.messages['requiredif'] = options.message;
+    });
+
+    $.validator.addMethod('requiredif', function (value, element, parameters) {
+        var desiredvalue = parameters.desiredvalue;
+        desiredvalue = (desiredvalue == null ? '' : desiredvalue).toString();
+        var controlType = $("input[id$='" + parameters.dependentproperty + "']").attr("type");
+        var actualvalue = {}
+        if (controlType == "checkbox" || controlType == "radio") {
+            var control = $("input[id$='" + parameters.dependentproperty + "']:checked");
+            actualvalue = control.val();
+        } else {
+            actualvalue = $("#" + parameters.dependentproperty).val();
+        }
+        if ($.trim(desiredvalue).toLowerCase() === $.trim(actualvalue).toLocaleLowerCase()) {
+            var isValid = $.validator.methods.required.call(this, value, element, parameters);
+            return isValid;
+        }
+        return true;
     });
 </script>

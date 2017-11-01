@@ -84,13 +84,25 @@
                 to = $("#CheckOutDate").datepicker({
                     defaultDate: "+1w",
                     changeMonth: true,
-                    numberOfMonths: 3
+                    numberOfMonths: 3,
                 })
                     .on("change", function () {
-                        from.datepicker("option", "maxDate", getDate(this));
+                        from.datepicker("option", "maxDate", getDate1(this));
                     });
 
             function getDate(element) {
+                var date;
+                try {
+                    date = $.datepicker.parseDate(dateFormat, element.value);
+                    date.setDate(date.getDate() + 1)
+                } catch (error) {
+                    date = null;
+                }
+
+                return date;
+            }
+
+            function getDate1(element) {
                 var date;
                 try {
                     date = $.datepicker.parseDate(dateFormat, element.value);

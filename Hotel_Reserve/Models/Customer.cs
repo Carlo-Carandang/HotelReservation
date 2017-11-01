@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -14,43 +14,38 @@ namespace Hotel_Reserve.Models
 
         [Required(ErrorMessage = "Please Enter Last Name")]
         [Display(Name = "Last Name")]
-        [StringLength(50)]
-        [RegularExpression(@"^[a-zA-Z''-'\s]{1,50}$", ErrorMessage = "special characters and numbers are not allowed")]
+        [RegularExpression(@"^[^;:!@#$%^*+?/\\\\<>0-9]{1,50}$", ErrorMessage = "special characters and numbers are not allowed")]
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "Please Enter First Name")]
         [Display(Name = "First Name")]
-        [StringLength(50)]
-        [RegularExpression(@"^[a-zA-Z''-'\s]{1,50}$", ErrorMessage = "special characters and numbers are not allowed")]
+        [RegularExpression(@"^[^;:!@#$%^*+?/\\\\<>0-9]{1,50}$", ErrorMessage = "special characters and numbers are not allowed")]
         public string FirstName { get; set; }
 
         [Required(ErrorMessage = "Please Enter Street Number")]
         [Display(Name = "Street Number")]
-        [StringLength(10)]
+        [StringLength(5)]
         public string StreetNumber { get; set; }
 
         [Required(ErrorMessage = "Please Enter Street Name")]
         [Display(Name = "Street Name")]
-        [StringLength(50)]
         public string StreetName { get; set; }
 
         [Required(ErrorMessage = "Please Enter City")]
         [Display(Name = "City")]
-        [StringLength(50)]
-        [RegularExpression(@"^[a-zA-Z''-'\s]{1,50}$", ErrorMessage = "special characters and numbers are not allowed")]
+        [RegularExpression(@"^[^;:!@#$%^*+?/\\\\<>0-9]{1,50}$", ErrorMessage = "special characters and numbers are not allowed")]
         public string City { get; set; }
 
         [Required(ErrorMessage = "Please Enter Province")]
         [Display(Name = "Province")]
-        [StringLength(50)]
         public string Province { get; set; }
 
         [Required(ErrorMessage = "Please Enter Country")]
         [Display(Name="Country")]
-        [StringLength(50)]
         public string Country { get; set; }
 
-        [Required(ErrorMessage = "Please Enter Postal Code")]
+        [RequiredIf("Country", "USA", "error")]
+        [RegularExpression("^([A-Za-z]\\d[A-Za-z][ -]?\\d[A-Za-z]\\d)|(^[0-9]{5}(?:-[0-9]{4})?)$",ErrorMessage = "Invalid Postal/Zip Code")]
         [Display(Name = "Postal Code")]
         [StringLength(10)]
         public string PostalCode { get; set; }
@@ -61,7 +56,6 @@ namespace Hotel_Reserve.Models
         [RegularExpression(@"^([0-9\(\)\/\+ \-]*)$", ErrorMessage = "Invalid Phone number")]
         public string PhoneNumber { get; set; }
 
-        [StringLength(50)]
         [Display(Name = "Email address")]
         [Required(ErrorMessage = "The email address is required")]
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
@@ -76,7 +70,6 @@ namespace Hotel_Reserve.Models
 
         [Required]
         [Display(Name = "Credit Card Type")]
-        [StringLength(50)]
         public string CreditCardType { get; set; }
 
         [Required]
@@ -85,14 +78,13 @@ namespace Hotel_Reserve.Models
         public string CreditCardNumber { get; set; }
 
         [Required]
-        [StringLength(50)]
         [Display(Name = "Credit Card Name")]
-        [RegularExpression(@"^[a-zA-Z''-'\s]{1,50}$", ErrorMessage = "special characters and numbers are not allowed")]
+        [RegularExpression(@"^[^;:!@#$%^*+?/\\\\<>0-9]{1,50}$", ErrorMessage = "special characters and numbers are not allowed")]
         public string CreditCardName { get; set; }
 
         [Required]
-        [StringLength(50)]
         [Display(Name = "Credit Card Expiration Date")]
+        [RegularExpression(@"^(0[1-9]|1[0-2])\/(20(1[6-9]|2[0-9]|3[0-1]))$", ErrorMessage = "Only MM/YYYY format from 2016 to 2031")]
         public string ExpirationDate { get; set; }
 
 
