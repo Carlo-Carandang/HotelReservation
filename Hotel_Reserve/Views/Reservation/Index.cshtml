@@ -1,18 +1,15 @@
 ﻿@model IEnumerable<Hotel_Reserve.Models.Reservation>
-
-@if (Session["Email"] == null)
-{
-
-}
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<h2>Hello @Session["FName"],</h2>
+<br />
+<br />
+<center><h3>Dashboard</h3></center>
+<br />
+<h3>Your Reservations</h3>
+<br />
 <table class="table">
     <tr>
         <th>
@@ -44,11 +41,14 @@
             @Html.DisplayFor(modelItem => item.NumberOfGuest)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }, new { @class = "btn btn-warning btn-md" })
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id }, new { @class = "btn btn-danger btn-md" })
         </td>
     </tr>
 }
 
 </table>
+<br />
+<p>
+    @Html.ActionLink("Add Reservation", "Create", null, new { @class = "btn btn-info btn-md" })
+</p>

@@ -10,14 +10,17 @@ namespace Hotel_Reserve.Models
     [Table("Reservation")]
     public partial class Reservation
     {
+
         public int Id { get; set; }
 
         [DisplayName("Check In Date")]
         [Column(TypeName = "date")]
+        [DataType(DataType.Date)]
         public DateTime CheckInDate { get; set; }
 
         [DisplayName("Check Out date")]
         [Column(TypeName = "date")]
+        [DataType(DataType.Date)]
         public DateTime CheckOutDate { get; set; }
 
         [DisplayName("Number of Rooms")]

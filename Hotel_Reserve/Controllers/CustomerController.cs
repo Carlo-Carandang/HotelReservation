@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Hotel_Reserve.Models;
+using System.Net;
+
 namespace Hotel_Reserve.Controllers
 {
     public class CustomerController : Controller
@@ -118,6 +120,7 @@ namespace Hotel_Reserve.Controllers
             }
             
         }
+   
         //------------------------------------------------Error---------------------------------------------------------------------
         public ActionResult Error()
         {
