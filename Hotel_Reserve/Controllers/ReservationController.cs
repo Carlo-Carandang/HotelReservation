@@ -16,7 +16,7 @@ namespace Hotel_Reserve.Controllers
 
         public ReservationContext Db { get => db; set => db = value; }
 
-        // GET: Reservation
+        // -----------------------------------------------View Reservations--------------------------------
         public ActionResult Index(int id)
         {
             if(Session["Email"]!=null)
@@ -31,6 +31,7 @@ namespace Hotel_Reserve.Controllers
             }
         }
 
+        //-------------------------------------GET: Create a reservation----------------------------------
         public ActionResult Create()
         {
             List<SelectListItem> ObjItem2 = new List<SelectListItem>()
@@ -53,7 +54,7 @@ namespace Hotel_Reserve.Controllers
             }
                 
         }
-
+        //------------------------------------POST: Create a reservation-----------------------------------------
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Reservation reserve)
@@ -74,13 +75,23 @@ namespace Hotel_Reserve.Controllers
 
             return View();
         }
-
+        //---------------------------------GET: Edit a reservation--------------------------------------------------
         public ActionResult Edit(int? id )
         {
+            List<SelectListItem> ObjItem2 = new List<SelectListItem>()
+            {
+                new SelectListItem {Text="1",Value="1" },
+                new SelectListItem {Text="2",Value="2"},
+                new SelectListItem {Text="3",Value="3" },
+                new SelectListItem {Text="4",Value="4"},
+                new SelectListItem {Text="5",Value= "5"},
+
+            };
+            ViewBag.Numbers = ObjItem2;
 
             if (id == null || Session["Email"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("LoginCustomer", "Customer");
             }
             Reservation reservation = Db.Reservations.Find(id);
             if (reservation == null)
@@ -89,11 +100,12 @@ namespace Hotel_Reserve.Controllers
             }
             return View(reservation);
         }
-
+        //--------------------------------------POST: Edit a reservation--------------------------------------------
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Reservation reserve)
         {
+            
             int a = Int32.Parse(Session["CustomerId"].ToString());
             Reservation reservation = new Reservation();
             reservation.CheckInDate = reserve.CheckInDate;
@@ -104,14 +116,14 @@ namespace Hotel_Reserve.Controllers
 
             if (ModelState.IsValid)
             {
-                Db.Reservations.Add(reservation);
+                Db.Entry(reserve).State = EntityState.Modified;
                 Db.SaveChanges();
                 return RedirectToAction("Index","Reservation",new { id = a });
             }
 
             return View(reservation);
         }
-
+        //-----------------------------------GET: delete a reservation-------------------------------------------------------
         public ActionResult Delete(int? id)
         {
             if (id == null || Session["Email"]==null)
@@ -126,7 +138,7 @@ namespace Hotel_Reserve.Controllers
             return View(reservation);
         }
 
-        // POST: Reservations/Delete/5
+        //---------------------------------------POST: Reservations/Delete/5-----------------------------------------------
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

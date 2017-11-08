@@ -110,7 +110,7 @@ namespace Hotel_Reserve.Controllers
             {
                 return View("Error");
             }
-            else if(Session["Email"].ToString() == "Adminstrator")
+            else if(Session["Email"].ToString() == "adminstrator@mail.com")
             {
                 return View(db.Customers.ToList());
             }
